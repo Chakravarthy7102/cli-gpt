@@ -1,0 +1,27 @@
+{
+  "name": "cli-gpt",
+  "version": "1.0.0",
+  "description": "gpt inside cli",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node -r ts-node/register -r tsconfig-paths/register index.ts",
+    "debug:ts": "node --inspect -r ts-node/register -r tsconfig-paths/register index.ts",
+    "debug:tsb": "node --inspect-brk -r ts-node/register -r tsconfig-paths/register index.ts"
+  },
+  "keywords": [
+    "gpt",
+    "node"
+  ],
+  "author": "chakravarthi medicharla",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "ink": "^4.2.0",
+    "react": "^18.2.0"
+  }
+}
