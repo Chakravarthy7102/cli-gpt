@@ -19,11 +19,19 @@ const cli = meow(
 	{
 		importMeta: import.meta,
 		flags: {
-			name: {
-				type: 'string',
+			chat: {
+				default: true,
+				isRequired: true,
+				type: 'boolean',
 			},
 		},
 	},
 );
 
-render(<App name={cli.flags.name} />);
+const main = async () => {
+	const app = render(<App chat={cli.flags.chat} />);
+	//run the program until the user interupts the program with a sigterm signal.
+	await app.waitUntilExit();
+};
+
+main();
