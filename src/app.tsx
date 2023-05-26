@@ -3,6 +3,7 @@ import {Box, Text, useInput} from 'ink';
 import TextInput from 'ink-text-input';
 import BigText from 'ink-big-text';
 import Spinner from 'ink-spinner';
+import chat from './api.js';
 
 type Props = {
 	chat: boolean;
@@ -15,16 +16,29 @@ export default function App({chat}: Props) {
 
 const Interface = () => {
 	const [question, setQuestion] = useState('');
+	const [error, setError] = useState('');
+	const [gptAnswer, setGptAnswer] = useState('');
 	const [isGptThinking, setIsGptThinking] = useState(false);
 	useInput((_, key) => {
 		if (key.return) {
-			setQuestion('');
-			setIsGptThinking(true);
 			//do the api request to openapi and after processesing format the output and
 			//show the ouput
-			setTimeout(() => {
+			setIsGptThinking(true);
+			//adding some waiting period.
+			setTimeout(async () => {
+				const response = await chat(question);
+				setQuestion('');
+
+				if (response.error) {
+					setError(response.error.message);
+				}
+
+				if (response.result) {
+					setGptAnswer(response.result);
+				}
+
 				setIsGptThinking(false);
-			}, 5000);
+			}, 2000);
 		}
 	});
 
@@ -33,7 +47,7 @@ const Interface = () => {
 			<BigText colors={['green']} text="GPT CLI" />
 			<Box marginLeft={20} marginBottom={2}>
 				<Text>
-					Chat GPT in you{' '}
+					Chat GPT in your{' '}
 					<Text italic color="blueBright">
 						cli
 					</Text>
@@ -46,9 +60,14 @@ const Interface = () => {
 					</Text>
 					{' GPT is thinking....'}
 				</Text>
+			) : gptAnswer ? (
+				<Box display="flex">
+					<Text color="redBright">gpt: </Text>
+					<Text color="yellowBright">{gptAnswer}</Text>
+				</Box>
 			) : (
 				<Box display="flex">
-					<Text color={'greenBright'}>User: </Text>
+					<Text color={'greenBright'}>user: </Text>
 					<TextInput
 						placeholder="Ask a interesting question."
 						onChange={q => setQuestion(q)}
