@@ -7,14 +7,15 @@ import App from './app.js';
 const cli = meow(
 	`
 	Usage
-	  $ my-ink-cli
+	  $ cli-gpt
 
 	Options
-		--name  Your name
+		--chat
 
 	Examples
-	  $ my-ink-cli --name=Jane
-	  Hello, Jane
+	  $ cli-gpt --chat
+	     (or just)
+	  $ cli-gpt
 `,
 	{
 		importMeta: import.meta,
