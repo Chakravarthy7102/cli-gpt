@@ -5,12 +5,8 @@ import BigText from 'ink-big-text';
 import Spinner from 'ink-spinner';
 import chat from './api.js';
 
-type Props = {
-	chat: boolean;
-};
 
-export default function App({chat}: Props) {
-	if (!chat) return <></>;
+export default function App() {
 	return <Interface />;
 }
 
@@ -21,10 +17,8 @@ const Interface = () => {
 	const [isGptThinking, setIsGptThinking] = useState(false);
 	useInput((_, key) => {
 		if (key.return) {
-			//do the api request to openapi and after processesing format the output and
-			//show the ouput
+			
 			setIsGptThinking(true);
-			//adding some waiting period.
 			setTimeout(async () => {
 				const response = await chat(question);
 				setQuestion('');
@@ -42,6 +36,45 @@ const Interface = () => {
 		}
 	});
 
+	let innerJsx = <></>;
+
+	if (isGptThinking) {
+		innerJsx = (
+			<Text>
+				<Text color="green">
+					<Spinner type="circleHalves" />
+				</Text>
+				{' GPT is thinking....'}
+			</Text>
+		);
+	} else if (gptAnswer) {
+		innerJsx = (
+			<Box display="flex">
+				<Text color="redBright">gpt: </Text>
+				<Text color="yellowBright">{gptAnswer}</Text>
+			</Box>
+		);
+	} else {
+		innerJsx = (
+			<Box display="flex" gap={3} flexDirection="column">
+				{error ? (
+					<Text underline bold color="redBright">
+						<Text color="yellowBright">Error: </Text> {error}
+					</Text>
+				) : null}
+
+				<Box>
+					<Text color={'greenBright'}>user: </Text>
+					<TextInput
+						placeholder="Ask a interesting question."
+						onChange={q => setQuestion(q)}
+						value={question}
+					/>
+				</Box>
+			</Box>
+		);
+	}
+
 	return (
 		<Box display="flex" flexDirection="column">
 			<BigText colors={['green']} text="GPT CLI" />
@@ -53,28 +86,7 @@ const Interface = () => {
 					</Text>
 				</Text>
 			</Box>
-			{isGptThinking ? (
-				<Text>
-					<Text color="green">
-						<Spinner type="circleHalves" />
-					</Text>
-					{' GPT is thinking....'}
-				</Text>
-			) : gptAnswer ? (
-				<Box display="flex">
-					<Text color="redBright">gpt: </Text>
-					<Text color="yellowBright">{gptAnswer}</Text>
-				</Box>
-			) : (
-				<Box display="flex">
-					<Text color={'greenBright'}>user: </Text>
-					<TextInput
-						placeholder="Ask a interesting question."
-						onChange={q => setQuestion(q)}
-						value={question}
-					/>
-				</Box>
-			)}
+			{innerJsx}
 		</Box>
 	);
 };

@@ -2,9 +2,10 @@
 import React from 'react';
 import {render} from 'ink';
 import meow from 'meow';
+
 import App from './app.js';
 
-const cli = meow(
+meow(
 	`
 	Usage
 	  $ cli-gpt
@@ -30,7 +31,7 @@ const cli = meow(
 );
 
 const main = async () => {
-	const app = render(<App chat={cli.flags.chat} />);
+	const app = render(<App />);
 	//run the program until the user interupts the program with a sigterm signal.
 	await app.waitUntilExit();
 };
