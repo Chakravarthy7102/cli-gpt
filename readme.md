@@ -1,7 +1,7 @@
 ## Install
 
 ```bash
-$ npm install --global cli-gpt
+$ npm install --global gptter
 ```
 
 ## CLI

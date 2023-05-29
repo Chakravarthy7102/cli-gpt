@@ -11,7 +11,6 @@ const openai = new OpenAIApi(configuration);
 export default async function chat(
 	question: string,
 ): Promise<{error: {message: string} | undefined; result: string | undefined}> {
-	console.log({question});
 	if (!configuration.apiKey) {
 		return {
 			error: {
