@@ -1,6 +1,6 @@
 {
-	"name": "my-ink-cli",
-	"version": "0.0.0",
+	"name": "gptter",
+	"version": "1.0.0",
 	"license": "MIT",
 	"bin": "dist/cli.js",
 	"type": "module",
@@ -15,6 +15,22 @@
 	"files": [
 		"dist"
 	],
+	"keywords": [
+		"chatgpt",
+		"gpt3",
+		"cligpt",
+		"gpt3.5",
+		"openai",
+		"samaltman"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Chakravarthy7102/cligpt.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Chakravarthy7102/cligpt/issues"
+	},
+	"homepage": "https://github.com/Chakravarthy7102/cligpt/#readme",
 	"dependencies": {
 		"dotenv": "^16.0.3",
 		"ink": "^4.1.0",
