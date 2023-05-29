@@ -20,3 +20,7 @@ $ cli-gpt --help
   	     (or just)
   	  $ cli-gpt
 ```
+
+<p align="center">
+		<img width="525" src="cli.png">
+</p>
