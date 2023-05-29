@@ -1,3 +1,9 @@
+
+
+<p align="center">
+		<img width="525" src="cli.png">
+</p>
+
 ## Install
 
 ```bash
@@ -21,6 +27,4 @@ $ cli-gpt --help
   	  $ cli-gpt
 ```
 
-<p align="center">
-		<img width="525" src="cli.png">
-</p>
+
